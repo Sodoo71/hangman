@@ -1,6 +1,7 @@
-const words = ["hool", "food", "code", "computer"];
-const word = words[Math.floor(Math.random() * words.length)];
+debugger
+const words = ["panda", "cola", "code", "computer"];
 const startBtn = document.querySelector(".start");
+let word = "";
 let guessed = [];
 let wrongGuesses = 0;
 
@@ -11,12 +12,28 @@ function displayWord() {
     .join(" ");
   document.getElementById("display-word").textContent = display;
 }
-
-function updateStatus() {
-  document.getElementById(
-    "hangman-status"
-  ).textContent = `Wrong guesses: ${wrongGuesses}`;
+function imgChange() {
+  const img = document.getElementById("img");
+  img.src = `./image/hangman-${wrongGuesses}.svg`;
 }
+function updateStatus() {
+  document.getElementById("hangman").textContent = `Fail: ${wrongGuesses}`;
+}
+
+function startGame() {
+  word = words[Math.floor(Math.random() * words.length)];
+  guessed = [];
+  wrongGuesses = 0;
+  document.querySelectorAll(".word button").forEach((btn) => {
+    btn.disabled = false;
+  });
+  displayWord();
+  updateStatus();
+  imgChange();
+}
+
+startBtn.addEventListener("click", startGame);
+
 
 document.querySelectorAll(".word button").forEach((btn) => {
   btn.addEventListener("click", function () {
@@ -27,17 +44,17 @@ document.querySelectorAll(".word button").forEach((btn) => {
     } else {
       wrongGuesses++;
       updateStatus();
+      imgChange();
     }
     displayWord();
     if (!document.getElementById("display-word").textContent.includes("_")) {
-      alert("You win!");
+      document.createElement
+      (`Win "${word}"`);
+      startGame();
     }
-    if (wrongGuesses >= 6) {
-      alert(`You lose! The word was: ${word}`);
+    if (wrongGuesses === 7) {
+      alert(`Буруу байна "${word}"`);
+      startGame();
     }
   });
 });
-
-
-displayWord();
-updateStatus();

@@ -48,3 +48,8 @@ button:disabled {
   color: #aaa;
   cursor: not-allowed;
 }
+.start{
+  color: white;
+  background-color: black;
+  width: 100px;
+}
